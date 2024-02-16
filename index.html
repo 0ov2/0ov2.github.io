@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiple Choice Questionnaire</title>
+</head>
+<body>
+    <h2>Questionnaire</h2>
+    <form id="questionnaireForm">
+        <div>
+            <p>1. What is the capital of France?</p>
+            <input type="radio" id="paris" name="capital" value="Paris">
+            <label for="paris">Paris</label><br>
+            <input type="radio" id="london" name="capital" value="London">
+            <label for="london">London</label><br>
+            <input type="radio" id="rome" name="capital" value="Rome">
+            <label for="rome">Rome</label><br>
+        </div>
+        <!-- Add more questions as needed -->
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            const selectedValue = document.querySelector('input[name="capital"]:checked').value;
+            alert("You selected: " + selectedValue);
+            // Add more logic here as needed
+        }
+    </script>
+</body>
+</html>
