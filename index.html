@@ -23,8 +23,6 @@
         height: 100vh;
         margin: 0;
       }
-
-      /* Other styles adjusted to work with the new structure */
       .btn-container,
       .qa-container,
       h2 {
@@ -37,7 +35,6 @@
         justify-content: center;
         align-items: center;
       }
-
       button {
         font-size: 30px;
         background-color: #6168b0;
@@ -51,15 +48,14 @@
         cursor: pointer;
         margin-top: 1.83rem;
       }
-
       h2 {
         font-size: 53px;
       }
-
       .qa-container {
         font-size: 35px;
         font-weight: 800;
         position: relative;
+        min-height: 453px;
       }
       .qa-container.q1::before {
         content: "";
@@ -74,11 +70,9 @@
         opacity: 0.5;
         z-index: -1;
       }
-
       input {
         margin-bottom: 19px;
       }
-
       .hidden {
         display: none;
       }
@@ -91,10 +85,10 @@
         <p>1. Which company made Shigeru Miyamoto famous?</p>
         <input type="radio" id="bethesda" name="capital" value="bethesda" />
         <label for="bethesda">Bethesda</label><br />
-        <input type="radio" id="nintendo" name="capital" value="nintendo" />
-        <label for="nintendo">Nintendo</label><br />
         <input type="radio" id="ubisoft" name="capital" value="ubisoft" />
         <label for="ubisoft">Ubisoft</label><br />
+        <input type="radio" id="nintendo" name="capital" value="nintendo" />
+        <label for="nintendo">Nintendo</label><br />
       </div>
       <div class="qa-container q2 hidden">
         <p>2. What is stuff?</p>
@@ -111,7 +105,9 @@
     </form>
 
     <script>
-      function submitForm() {}
+      function submitForm() {
+        const selectedValue = document.querySelector('input[name="capital"]:checked').value;
+      }
     </script>
   </body>
 </html>
