@@ -51,11 +51,15 @@
       h2 {
         font-size: 53px;
       }
+      p {
+        margin-top: 0;
+      }
       .qa-container {
         font-size: 35px;
         font-weight: 800;
         position: relative;
         min-height: 453px;
+        padding: 10px;
       }
       .qa-container.q1::before {
         content: "";
@@ -64,7 +68,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: url("./img/q1-img.jpg");
+        background-image: url("https://i.ytimg.com/vi/RkkMggVljVM/maxresdefault.jpg");
         background-size: cover;
         background-position: center;
         opacity: 0.5;
@@ -83,20 +87,20 @@
     <form id="questionnaireForm">
       <div class="qa-container q1">
         <p>1. Which company made Shigeru Miyamoto famous?</p>
-        <input type="radio" id="bethesda" name="capital" value="bethesda" />
+        <input type="radio" id="bethesda" name="q1" value="bethesda" />
         <label for="bethesda">Bethesda</label><br />
-        <input type="radio" id="ubisoft" name="capital" value="ubisoft" />
+        <input type="radio" id="ubisoft" name="q1" value="ubisoft" />
         <label for="ubisoft">Ubisoft</label><br />
-        <input type="radio" id="nintendo" name="capital" value="nintendo" />
+        <input type="radio" id="nintendo" name="q1" value="nintendo" />
         <label for="nintendo">Nintendo</label><br />
       </div>
       <div class="qa-container q2 hidden">
         <p>2. What is stuff?</p>
-        <input type="radio" id="paris" name="capital" value="Paris" />
+        <input type="radio" id="paris" name="q2" value="Paris" />
         <label for="paris">ss</label><br />
-        <input type="radio" id="london" name="capital" value="London" />
+        <input type="radio" id="london" name="q2" value="London" />
         <label for="london">ss</label><br />
-        <input type="radio" id="rome" name="capital" value="Rome" />
+        <input type="radio" id="rome" name="q2" value="Rome" />
         <label for="rome">ss</label><br />
       </div>
       <div class="btn-container">
@@ -105,9 +109,64 @@
     </form>
 
     <script>
-      function submitForm() {
-        const selectedValue = document.querySelector('input[name="capital"]:checked').value;
+      function displayCurrentQuestion() {
+        if (!localStorage.currentQuestion) {
+            localStorage.currentQuestion = 1
+        }
+        if (!localStorage.answers) {
+            localStorage.answers = JSON.stringify({
+                q1: '',
+                q2: '',
+                q3: '',
+                q4: '',
+                q5: '',
+            })
+        }
+        let currentQuestionElement = document.querySelector(
+          `.q${localStorage.currentQuestion}`
+        );
+
+        hideAllQuestions();
+        currentQuestionElement.classList.remove("hidden");
       }
+      function hideAllQuestions() {
+        const questions = document.querySelectorAll(".qa-container");
+        questions.forEach((q) => {
+          if (!q.classList.contains("hidden")) {
+            q.classList.add("hidden");
+          }
+        });
+      }
+      
+      function submitForm() {
+        const selectedValue = document.querySelector(
+          `input[name="q${localStorage.currentQuestion}"]:checked`
+        ).value;
+        const currentQuestionElement = document.querySelector(
+          `.q${localStorage.currentQuestion}`
+        );
+
+        //
+        //  Update answer
+        let currentAnswers = JSON.parse(localStorage.answers)
+        currentAnswers[`q${localStorage.currentQuestion}`] = selectedValue
+        localStorage.answers = JSON.stringify(currentAnswers)
+
+        //
+        // Update current Question
+        localStorage.currentQuestion++
+
+        //
+        // Change the question
+        currentQuestionElement.classList.add('hidden')
+        const nextQuestionElement = document.querySelector(
+          `.q${localStorage.currentQuestion}`
+        );
+        nextQuestionElement.classList.remove('hidden')
+      }
+
+      displayCurrentQuestion()
     </script>
+    
   </body>
 </html>
