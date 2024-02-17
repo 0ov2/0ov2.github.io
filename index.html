@@ -18,8 +18,18 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-image: linear-gradient(90deg, #0cb7eb, #6168b0);
+        background-image: linear-gradient(10deg, #0cb7eb, #6168b0);
         color: white;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Other styles adjusted to work with the new structure */
+      .btn-container,
+      .qa-container,
+      h2 {
+        position: relative;
+        z-index: 1;
       }
       .btn-container {
         width: 100%;
@@ -48,38 +58,60 @@
 
       .qa-container {
         font-size: 35px;
+        font-weight: 800;
+        position: relative;
+      }
+      .qa-container.q1::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("./img/q1-img.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.5;
+        z-index: -1;
       }
 
       input {
         margin-bottom: 19px;
+      }
+
+      .hidden {
+        display: none;
       }
     </style>
   </head>
   <body>
     <h2>Questionnaire</h2>
     <form id="questionnaireForm">
-      <div class="qa-container">
-        <p>1. What is the capital of France?</p>
+      <div class="qa-container q1">
+        <p>1. Which company made Shigeru Miyamoto famous?</p>
+        <input type="radio" id="bethesda" name="capital" value="bethesda" />
+        <label for="bethesda">Bethesda</label><br />
+        <input type="radio" id="nintendo" name="capital" value="nintendo" />
+        <label for="nintendo">Nintendo</label><br />
+        <input type="radio" id="ubisoft" name="capital" value="ubisoft" />
+        <label for="ubisoft">Ubisoft</label><br />
+      </div>
+      <div class="qa-container q2 hidden">
+        <p>2. What is stuff?</p>
         <input type="radio" id="paris" name="capital" value="Paris" />
-        <label for="paris">Paris</label><br />
+        <label for="paris">ss</label><br />
         <input type="radio" id="london" name="capital" value="London" />
-        <label for="london">London</label><br />
+        <label for="london">ss</label><br />
         <input type="radio" id="rome" name="capital" value="Rome" />
-        <label for="rome">Rome</label><br />
+        <label for="rome">ss</label><br />
       </div>
       <div class="btn-container">
-        <button type="button" onclick="submitForm()">Submit</button>
+        <button type="button" onclick="submitForm()">NEXT</button>
       </div>
     </form>
 
     <script>
-      function submitForm() {
-        const selectedValue = document.querySelector(
-          'input[name="capital"]:checked'
-        ).value;
-        alert("You selected: " + selectedValue);
-        // Add more logic here as needed
-      }
+      function submitForm() {}
     </script>
   </body>
 </html>
